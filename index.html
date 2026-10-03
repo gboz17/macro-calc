@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Macro Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Macro calculator</h1>
+    <p class="lede">Daily calories and protein, carb, and fat targets from your stats. Mifflin-St Jeor for resting energy, an activity multiplier on top, then a goal adjustment.</p>
+
+    <form id="calc" novalidate>
+      <div class="grid">
+        <label>
+          Height (cm)
+          <input type="number" name="height" min="100" max="250" step="1" placeholder="175" required>
+        </label>
+        <label>
+          Weight (kg)
+          <input type="number" name="weight" min="30" max="300" step="0.1" placeholder="80" required>
+        </label>
+        <label>
+          Age
+          <input type="number" name="age" min="14" max="100" step="1" placeholder="35" required>
+        </label>
+        <label>
+          Sex
+          <select name="sex" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
+        <label class="wide">
+          Activity
+          <select name="activity" required>
+            <option value="1.2">Sedentary: desk job, little exercise</option>
+            <option value="1.375">Light: exercise 1–3 days a week</option>
+            <option value="1.55" selected>Moderate: exercise 3–5 days a week</option>
+            <option value="1.725">Active: hard exercise 6–7 days a week</option>
+            <option value="1.9">Very active: physical job plus training</option>
+          </select>
+        </label>
+        <label class="wide">
+          Goal
+          <select name="goal" required>
+            <option value="-500">Lose fat</option>
+            <option value="0" selected>Maintain</option>
+            <option value="300">Build muscle</option>
+          </select>
+        </label>
+      </div>
+      <button type="submit">Calculate</button>
+      <p id="error" class="error" role="alert" hidden></p>
+    </form>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <h2>Your targets</h2>
+      <div class="calories">
+        <span id="calories">0</span>
+        <span class="unit">kcal / day</span>
+      </div>
+      <dl class="macros">
+        <div><dt>Protein</dt><dd><span id="protein">0</span> g</dd></div>
+        <div><dt>Carbs</dt><dd><span id="carbs">0</span> g</dd></div>
+        <div><dt>Fat</dt><dd><span id="fat">0</span> g</dd></div>
+      </dl>
+      <p class="fine">Resting energy <span id="bmr">0</span> kcal, maintenance <span id="tdee">0</span> kcal. Protein at 1.8 g per kg of body weight, fat at 25% of calories, carbs make up the rest. Estimates only; adjust from how your weight actually moves over two to three weeks.</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
