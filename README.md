@@ -13,6 +13,10 @@ Open `index.html` in a browser, or serve the folder with any static file server.
 
 Estimates only. Not medical advice.
 
+## Licence
+
+[Fair Core License, FCL-1.0-ALv2](LICENSE.md): use it, read it, change it, and run your own copy; don't sell it as a competing service. Each version becomes Apache 2.0 two years after release.
+
 ## Status
 
 A test seed for the HybridSource pipeline. It exists to run a project through the platform once, start to finish. Not a product.
