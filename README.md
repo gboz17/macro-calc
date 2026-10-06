@@ -8,7 +8,7 @@ Open `index.html` in a browser, or serve the folder with any static file server.
 
 - Resting energy: Mifflin-St Jeor.
 - Maintenance: resting energy times an activity multiplier (1.2 to 1.9).
-- Goal: −500 kcal to lose fat, +300 to build muscle, floored at 1,200 kcal.
+- Goal: −500 kcal to lose fat, +300 to build muscle, floored at 1,200 kcal. The floor never goes above maintenance, so a small or sedentary person cutting gets maintenance, not a surplus. The page says when the floor kicks in.
 - Protein 1.8 g per kg of body weight, fat 25% of calories, carbs the rest.
 
 Estimates only. Not medical advice.

@@ -131,6 +131,14 @@ button {
 
 .unit { color: var(--muted); }
 
+.note {
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+  margin: -4px 0 16px;
+}
+
 .macros {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
