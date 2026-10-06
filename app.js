@@ -4,16 +4,22 @@ function bmr({ weight, height, age, sex }) {
   return sex === "male" ? base + 5 : base - 161;
 }
 
+// Lowest daily intake the calculator will suggest.
+const FLOOR = 1200;
+
 // Daily targets. Protein is fixed per kg of body weight, fat is a share of
-// calories, carbs take whatever is left.
+// calories, carbs take whatever is left. The floor never rises above
+// maintenance, so a deficit can shrink to zero but never turn into a surplus.
 function targets(input) {
   const resting = bmr(input);
   const tdee = resting * input.activity;
-  const calories = Math.max(1200, tdee + input.goal);
+  const floor = Math.min(FLOOR, tdee);
+  const floored = tdee + input.goal < floor;
+  const calories = floored ? floor : tdee + input.goal;
   const protein = 1.8 * input.weight;
   const fat = (calories * 0.25) / 9;
   const carbs = Math.max(0, (calories - protein * 4 - fat * 9) / 4);
-  return { resting, tdee, calories, protein, fat, carbs };
+  return { resting, tdee, calories, protein, fat, carbs, floored };
 }
 
 function readForm(form) {
@@ -37,6 +43,7 @@ function readForm(form) {
 const form = document.getElementById("calc");
 const error = document.getElementById("error");
 const results = document.getElementById("results");
+const floorNote = document.getElementById("floor-note");
 const show = (id, value) => {
   document.getElementById(id).textContent = Math.round(value).toLocaleString();
 };
@@ -58,5 +65,11 @@ form.addEventListener("submit", (event) => {
   show("protein", t.protein);
   show("carbs", t.carbs);
   show("fat", t.fat);
+  floorNote.hidden = !t.floored;
+  if (t.floored) {
+    floorNote.textContent = t.calories < FLOOR
+      ? "Your maintenance is under " + FLOOR.toLocaleString() + " kcal, so the target stays at maintenance instead of cutting further."
+      : "Held at the " + FLOOR.toLocaleString() + " kcal minimum, so the deficit is smaller than 500 kcal.";
+  }
   results.hidden = false;
 });
